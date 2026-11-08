@@ -128,7 +128,34 @@ ASL_CNN_Project/
 └── results/                        # graphiques et métriques
 ```
 
-## Exécution
+## Essayer le modèle sur sa propre photo
+
+Sans réentraîner : ouvrir un notebook vide sur [Google Colab](https://colab.research.google.com/), coller ce code dans une cellule et l'exécuter. Une fenêtre permet de choisir une ou plusieurs photos.
+
+```python
+!wget -q https://github.com/Laraki-Yacout/ASL_CNN_Project/raw/main/model/asl_cnn.keras
+!wget -q https://github.com/Laraki-Yacout/ASL_CNN_Project/raw/main/model/classes.json
+
+import json, numpy as np, keras
+from PIL import Image, ImageOps
+from google.colab import files
+
+model = keras.models.load_model("asl_cnn.keras")
+classes = json.load(open("classes.json"))["class_names"]
+
+for name in files.upload():
+    img = ImageOps.exif_transpose(Image.open(name)).convert("L")
+    w, h = img.size; s = min(w, h)
+    img = img.crop(((w - s) // 2, (h - s) // 2, (w - s) // 2 + s, (h - s) // 2 + s)).resize((28, 28))
+    x = np.asarray(img, dtype="float32").reshape(1, 28, 28, 1) / 255
+    p = model.predict(x, verbose=0)[0]
+    top = np.argsort(p)[::-1][:3]
+    print(name, "->", ", ".join(f"{classes[i]} ({p[i]:.0%})" for i in top))
+```
+
+Conseils : main seule au centre de la photo, fond uni, bonne lumière. Le modèle a été entraîné sur des images très homogènes ; une photo prise dans d'autres conditions peut être mal reconnue.
+
+## Exécution complète
 
 Le modèle entraîné est fourni dans `model/` : on peut le recharger avec `keras.models.load_model("model/asl_cnn.keras")` et l'ordre des classes avec `model/classes.json`.
 
