@@ -166,7 +166,7 @@ Tips: hand alone in the center of the photo, plain background, good lighting. Th
 
 ## Full run
 
-The trained model is provided in `model/`: load it with `keras.models.load_model("model/asl_cnn.keras")` and the class order with `model/classes.json`.
+The trained model is provided in `model/`. It comes from the first run of the notebook (test accuracy 96.17%, trained on the full training set). Load it with `keras.models.load_model("model/asl_cnn.keras")` and the class order with `model/classes.json`.
 
 To rerun everything:
 

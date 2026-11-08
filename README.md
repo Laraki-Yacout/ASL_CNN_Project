@@ -164,7 +164,7 @@ Conseils : main seule au centre de la photo, fond uni, bonne lumière. Le modèl
 
 ## Exécution complète
 
-Le modèle entraîné est fourni dans `model/` : on peut le recharger avec `keras.models.load_model("model/asl_cnn.keras")` et l'ordre des classes avec `model/classes.json`.
+Le modèle entraîné est fourni dans `model/`. Il provient de la première exécution du notebook (accuracy test 96,17 %, entraîné sur tout le train). On peut le recharger avec `keras.models.load_model("model/asl_cnn.keras")` et l'ordre des classes avec `model/classes.json`.
 
 Pour tout réexécuter :
 
