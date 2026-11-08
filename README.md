@@ -66,13 +66,56 @@ J et Z sont exclues car elles nécessitent un mouvement. Le dataset a été cons
 
 ## Résultats
 
-*À compléter avec les résultats réellement obtenus après exécution du notebook sur Google Colab.*
+Exécution du 8 novembre 2026 sur Google Colab (GPU T4).
+
+### Performance sur le test (7 172 images, évaluation unique)
+
+| Métrique | Valeur |
+|---|---|
+| **Accuracy** | **96,17 %** |
+| F1 macro | 0,960 |
+| Précision macro | 0,957 |
+| Rappel macro | 0,965 |
+| Erreurs | 275 / 7 172 |
+
+### Effet du volume de données (validation)
+
+| Données d'entraînement | Meilleure époque | Accuracy validation | Loss validation |
+|---|---|---|---|
+| 300 images / classe | 35 | 99,85 % | 0,0122 |
+| 600 images / classe | 24 | 99,98 % | 0,0016 |
+| Tout le train (21 964) | 21 | 100 % | 0,0003 |
+
+![Courbes d'apprentissage](results/courbes_apprentissage.png)
+
+### Validation optimiste : un point méthodologique
+
+La validation atteint 100 % mais le test 96,17 %. Une mesure de distance au plus proche voisin montre que les images de validation sont des **variantes très proches** d'images du train (même photo d'origine), contrairement aux images de test. Le test, gardé intact jusqu'à la fin, est donc la seule estimation fiable.
+
+![Proximité validation / test](results/proximite_val_test.png)
+
+### Matrice de confusion
+
+![Matrice de confusion](results/matrice_confusion.png)
+
+- F, L et O sont reconnues parfaitement (F1 = 1,00).
+- Les lettres les plus difficiles sont R (F1 0,883), G (0,885) et W (0,905).
+- **84 % des erreurs** concernent 10 paires de signes visuellement proches : B→W (41), M→S (31), Y→I (27), K→R (21), N→A (21), H→G (20), T→G (20)…
+
+![Principales confusions](results/principales_confusions.png)
 
 ## Limites
 
 - Les images sont très homogènes (main recadrée, 28 × 28, peu de personnes et d'arrière-plans) : les performances ne garantissent pas une reconnaissance fiable sur des photos prises en conditions réelles.
 - Le dataset provient de 1 704 photos seulement ; des variantes d'une même photo peuvent se trouver à la fois dans le train et la validation, ce qui peut rendre la validation optimiste.
 - J et Z (lettres en mouvement), les mots et les phrases ne sont pas couverts.
+
+## Perspectives
+
+- Augmentation de données (rotations, décalages, luminosité) pour améliorer la généralisation.
+- Test sur des photos réelles ou un autre dataset ASL.
+- Résolution plus élevée pour distinguer les détails fins (position du pouce).
+- Explicabilité (Grad-CAM) pour vérifier que le modèle regarde la main et non l'arrière-plan.
 
 ## Structure du dépôt
 
@@ -86,6 +129,10 @@ ASL_CNN_Project/
 ```
 
 ## Exécution
+
+Le modèle entraîné est fourni dans `model/` : on peut le recharger avec `keras.models.load_model("model/asl_cnn.keras")` et l'ordre des classes avec `model/classes.json`.
+
+Pour tout réexécuter :
 
 1. Cliquer sur le badge **Open in Colab** ci-dessus.
 2. **Exécution → Modifier le type d'exécution → T4 GPU**.
