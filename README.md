@@ -4,7 +4,7 @@
 
 [![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Laraki-Yacout/ASL_CNN_Project/blob/main/ASL_CNN_Classification.ipynb)
 
-Projet de Master **Ingénierie des Systèmes Intelligents (ISI)**, module « Intelligence Artificielle et Innovation ».
+Projet de **Master BD2C**, module « Intelligence Artificielle et Innovation ».
 Réseau de neurones convolutif entraîné à reconnaître les **24 lettres statiques de l'alphabet ASL** à partir d'images 28 × 28 en niveaux de gris.
 
 ---
@@ -144,4 +144,4 @@ Python · TensorFlow 2.21 · Keras 3 · NumPy · Pandas · scikit-learn · Matpl
 
 ## Auteures
 
-Projet réalisé en binôme dans le cadre du Master ISI.
+Projet réalisé en binôme dans le cadre du Master BD2C.
