@@ -2,6 +2,10 @@
 
 *American Sign Language Image Classification Using Convolutional Neural Networks*
 
+**Français** | [English](README.en.md)
+
+![Les 24 lettres du dataset](results/exemples_par_classe.png)
+
 [![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Laraki-Yacout/ASL_CNN_Project/blob/main/ASL_CNN_Classification.ipynb)
 
 Projet de **Master BD2C**, module « Intelligence Artificielle et Innovation ».
@@ -122,7 +126,8 @@ La validation atteint 100 % mais le test 96,17 %. Une mesure de distance au plus
 ```
 ASL_CNN_Project/
 ├── ASL_CNN_Classification.ipynb   # notebook complet (Colab)
-├── README.md
+├── README.md                       # présentation (français)
+├── README.en.md                    # présentation (anglais)
 ├── references.md                   # sources
 ├── model/                          # modèle entraîné (.keras) + classes.json
 └── results/                        # graphiques et métriques
