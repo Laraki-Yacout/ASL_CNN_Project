@@ -1,4 +1,4 @@
 expérience,images_train,époques_effectuées,meilleure_époque,train_accuracy,val_accuracy,train_loss,val_loss,durée_s
-300_par_classe,7200,40,35,0.9828,0.9985,0.0539,0.0122,56.2
-600_par_classe,14400,29,24,0.9922,0.9998,0.0317,0.0016,40.8
-tout_le_train,21964,26,21,0.9984,1.0,0.0074,0.0003,56.1
+300_par_classe,7200,40,39,0.9906,0.9996,0.0364,0.007,41.9
+600_par_classe,14400,40,37,0.9981,1.0,0.0073,0.0005,58.2
+tout_le_train,21964,17,12,0.9892,0.9998,0.0398,0.0047,36.9

@@ -70,31 +70,33 @@ J et Z sont exclues car elles nécessitent un mouvement. Le dataset a été cons
 
 ## Résultats
 
-Exécution du 8 novembre 2026 sur Google Colab (GPU T4).
+Résultats de l'exécution affichée dans le notebook (Google Colab, GPU T4). Une première exécution avait donné 96,17 % : sur GPU, les résultats varient légèrement d'une exécution à l'autre.
 
 ### Performance sur le test (7 172 images, évaluation unique)
 
 | Métrique | Valeur |
 |---|---|
-| **Accuracy** | **96,17 %** |
-| F1 macro | 0,960 |
-| Précision macro | 0,957 |
-| Rappel macro | 0,965 |
-| Erreurs | 275 / 7 172 |
+| **Accuracy** | **95,84 %** |
+| F1 macro | 0,954 |
+| Précision macro | 0,952 |
+| Rappel macro | 0,959 |
+| Erreurs | 298 / 7 172 |
 
 ### Effet du volume de données (validation)
 
 | Données d'entraînement | Meilleure époque | Accuracy validation | Loss validation |
 |---|---|---|---|
-| 300 images / classe | 35 | 99,85 % | 0,0122 |
-| 600 images / classe | 24 | 99,98 % | 0,0016 |
-| Tout le train (21 964) | 21 | 100 % | 0,0003 |
+| 300 images / classe | 39 | 99,96 % | 0,0070 |
+| 600 images / classe | 37 | 100 % | 0,0005 |
+| Tout le train (21 964) | 12 | 99,98 % | 0,0047 |
+
+Modèle retenu (plus petite perte de validation) : 600 images / classe. Avec tout le train, le modèle converge en une douzaine d'époques au lieu de près de 40.
 
 ![Courbes d'apprentissage](results/courbes_apprentissage.png)
 
 ### Validation optimiste : un point méthodologique
 
-La validation atteint 100 % mais le test 96,17 %. Une mesure de distance au plus proche voisin montre que les images de validation sont des **variantes très proches** d'images du train (même photo d'origine), contrairement aux images de test. Le test, gardé intact jusqu'à la fin, est donc la seule estimation fiable.
+La validation atteint 100 % mais le test 95,84 %. Une mesure de distance au plus proche voisin montre que les images de validation sont des **variantes très proches** d'images du train (même photo d'origine) : leur distance médiane au train est de 0,017, contre 0,089 pour le test, soit 5 fois plus. Le test, gardé intact jusqu'à la fin, est donc la seule estimation fiable.
 
 ![Proximité validation / test](results/proximite_val_test.png)
 
@@ -102,9 +104,9 @@ La validation atteint 100 % mais le test 96,17 %. Une mesure de distance au plus
 
 ![Matrice de confusion](results/matrice_confusion.png)
 
-- F, L et O sont reconnues parfaitement (F1 = 1,00).
-- Les lettres les plus difficiles sont R (F1 0,883), G (0,885) et W (0,905).
-- **84 % des erreurs** concernent 10 paires de signes visuellement proches : B→W (41), M→S (31), Y→I (27), K→R (21), N→A (21), H→G (20), T→G (20)…
+- C, F et O sont reconnues parfaitement (F1 = 1,00).
+- Les lettres les plus difficiles sont R (F1 0,814), W (0,869) et T (0,901).
+- **79 % des erreurs** concernent 10 paires de signes visuellement proches : M→S (43), B→W (41), T→G (28), V→W (21), K→R (21), R→U (19), N→D (17)…
 
 ![Principales confusions](results/principales_confusions.png)
 

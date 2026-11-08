@@ -1,11 +1,11 @@
 {
-  "modele": "tout_le_train",
-  "test_loss": 0.12395654618740082,
-  "test_accuracy": 0.9616564512252808,
-  "precision_macro": 0.9573571466566154,
-  "rappel_macro": 0.9646065960359117,
-  "f1_macro": 0.9596557236982896,
-  "precision_ponderee": 0.9640888876663836,
-  "rappel_pondere": 0.9616564417177914,
-  "f1_pondere": 0.9616641549431023
+  "modele": "600_par_classe",
+  "test_loss": 0.1366,
+  "test_accuracy": 0.9584,
+  "precision_macro": 0.9522,
+  "rappel_macro": 0.9587,
+  "f1_macro": 0.9535,
+  "precision_ponderee": 0.9622,
+  "rappel_pondere": 0.9584,
+  "f1_pondere": 0.9587
 }

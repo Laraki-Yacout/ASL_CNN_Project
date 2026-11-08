@@ -72,31 +72,33 @@ J and Z are excluded because they require motion. The dataset was built from onl
 
 ## Results
 
-Run of November 8, 2026 on Google Colab (T4 GPU).
+Results of the run shown in the notebook (Google Colab, T4 GPU). A first run gave 96.17%: on GPU, results vary slightly from one run to another.
 
 ### Test performance (7,172 images, evaluated once)
 
 | Metric | Value |
 |---|---|
-| **Accuracy** | **96.17%** |
-| Macro F1 | 0.960 |
-| Macro precision | 0.957 |
-| Macro recall | 0.965 |
-| Errors | 275 / 7,172 |
+| **Accuracy** | **95.84%** |
+| Macro F1 | 0.954 |
+| Macro precision | 0.952 |
+| Macro recall | 0.959 |
+| Errors | 298 / 7,172 |
 
 ### Effect of training-set size (validation)
 
 | Training data | Best epoch | Validation accuracy | Validation loss |
 |---|---|---|---|
-| 300 images / class | 35 | 99.85% | 0.0122 |
-| 600 images / class | 24 | 99.98% | 0.0016 |
-| Full training set (21,964) | 21 | 100% | 0.0003 |
+| 300 images / class | 39 | 99.96% | 0.0070 |
+| 600 images / class | 37 | 100% | 0.0005 |
+| Full training set (21,964) | 12 | 99.98% | 0.0047 |
+
+Selected model (lowest validation loss): 600 images / class. With the full training set, the model converges in about a dozen epochs instead of nearly 40.
 
 ![Learning curves](results/courbes_apprentissage.png)
 
 ### Optimistic validation: a methodological point
 
-Validation reaches 100% while the test set gives 96.17%. A nearest-neighbor distance measurement shows that validation images are **very close variants** of training images (same original photo), unlike test images. The test set, kept untouched until the end, is therefore the only reliable estimate.
+Validation reaches 100% while the test set gives 95.84%. A nearest-neighbor distance measurement shows that validation images are **very close variants** of training images (same original photo): their median distance to the training set is 0.017, versus 0.089 for test images, i.e. 5 times larger. The test set, kept untouched until the end, is therefore the only reliable estimate.
 
 ![Validation vs test proximity](results/proximite_val_test.png)
 
@@ -104,9 +106,9 @@ Validation reaches 100% while the test set gives 96.17%. A nearest-neighbor dist
 
 ![Confusion matrix](results/matrice_confusion.png)
 
-- F, L and O are recognized perfectly (F1 = 1.00).
-- The hardest letters are R (F1 0.883), G (0.885) and W (0.905).
-- **84% of errors** involve 10 pairs of visually similar signs: B→W (41), M→S (31), Y→I (27), K→R (21), N→A (21), H→G (20), T→G (20)…
+- C, F and O are recognized perfectly (F1 = 1.00).
+- The hardest letters are R (F1 0.814), W (0.869) and T (0.901).
+- **79% of errors** involve 10 pairs of visually similar signs: M→S (43), B→W (41), T→G (28), V→W (21), K→R (21), R→U (19), N→D (17)…
 
 ![Main confusions](results/principales_confusions.png)
 
